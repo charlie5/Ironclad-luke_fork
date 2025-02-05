@@ -13,13 +13,29 @@
 --
 --  You should have received a copy of the GNU General Public License
 --  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+with Arch.PCI;
 with Lib.Messages;
 
 package body Devices.e1000e with SPARK_Mode => Off is
    --  Probe for ATA drives and add em.
    function Init return Boolean is
+      Network_Class : constant := 16#02#;
+      Subclass      : constant := 16#0#;
+      Prog_IF       : constant := 16#0#;
+      PCI_Dev       : Arch.PCI.PCI_Device;
+      Success       : Boolean  := False;
    begin
       Lib.Messages.Put_Line ("Devices.e1000e.Init");
+
+      for Index in 1 .. Arch.PCI.Enumerate_Devices (Network_Class, Subclass, Prog_IF) loop
+         Arch.PCI.Search_Device (Network_Class, Subclass, Prog_IF, Index, PCI_Dev, Success);
+
+         if not Success then
+            return False;
+         else
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: Found e1000e");
+         end if;
+      end loop;
 
       return False;
    end Init;
