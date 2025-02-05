@@ -21,6 +21,7 @@ with Devices.PC_Speaker;
 with Devices.ATA;
 with Devices.SATA;
 with Devices.Serial;
+with Devices.e1000e;
 with Arch.Snippets;
 with Arch.CPU; use Arch.CPU;
 with Arch.APIC;
@@ -45,7 +46,8 @@ package body Arch.Hooks is
              Devices.PS2Keyboard.Init and then
              Devices.PS2Mouse.Init    and then
              Devices.SATA.Init        and then
-             Devices.Serial.Init;
+             Devices.Serial.Init      and then
+             Devices.e1000e.Init;
    end Devices_Hook;
 
    function PRCTL_Hook (Code : Natural; Arg : System.Address) return Boolean is

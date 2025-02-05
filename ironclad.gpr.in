@@ -27,6 +27,7 @@ project Ironclad is
 
    Common_Source_Dirs :=
       ("@SRCDIR@/source/arch/" & Arch,
+       "@SRCDIR@/source/arch/" & Arch & "/e1000e",
        "@SRCDIR@/source/arch",
        "@SRCDIR@/source/cryptography",
        "@SRCDIR@/source/devices",
