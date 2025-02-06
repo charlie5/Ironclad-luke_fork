@@ -22,8 +22,13 @@ package body Devices.e1000e with SPARK_Mode => Off is
       Network_Class : constant := 16#02#;
       Subclass      : constant := 16#0#;
       Prog_IF       : constant := 16#0#;
-      PCI_Dev       : Arch.PCI.PCI_Device;
       Success       : Boolean  := False;
+
+      PCI_Dev       : Arch.PCI.PCI_Device;
+      PCI_BAR0      : Arch.PCI.Base_Address_Register;
+      PCI_BAR1      : Arch.PCI.Base_Address_Register;
+      PCI_BAR2      : Arch.PCI.Base_Address_Register;
+      PCI_BAR3      : Arch.PCI.Base_Address_Register;
    begin
       Lib.Messages.Put_Line ("Devices.e1000e.Init");
 
@@ -34,6 +39,14 @@ package body Devices.e1000e with SPARK_Mode => Off is
             return False;
          else
             Lib.Messages.Put_Line ("Devices.e1000e.Init: Found e1000e");
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 0, PCI_BAR0, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: Correct?
+         else
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 0 found");
          end if;
       end loop;
 
