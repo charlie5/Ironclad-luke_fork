@@ -52,4 +52,40 @@ package body Devices.e1000e with SPARK_Mode => Off is
 
       return False;
    end Init;
+
+
+   procedure Read
+      (Key         : System.Address;
+       Offset      : Unsigned_64;
+       Data        : out Operation_Data;
+       Ret_Count   : out Natural;
+       Success     : out Boolean;
+       Is_Blocking : Boolean) is
+   begin
+      null;
+   end Read;
+
+
+   procedure Write
+      (Key         : System.Address;
+       Offset      : Unsigned_64;
+       Data        : Operation_Data;
+       Ret_Count   : out Natural;
+       Success     : out Boolean;
+       Is_Blocking : Boolean) is
+   begin
+      null;
+   end Write;
+
+
+   procedure IO_Control
+      (Key       : System.Address;
+       Request   : Unsigned_64;
+       Argument  : System.Address;
+       Has_Extra : out Boolean;
+       Extra     : out Unsigned_64;
+       Success   : out Boolean) is
+   begin
+      null;
+   end IO_Control;
 end Devices.e1000e;

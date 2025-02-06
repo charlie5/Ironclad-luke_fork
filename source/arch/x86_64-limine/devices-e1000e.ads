@@ -16,4 +16,29 @@
 package Devices.e1000e with SPARK_Mode => Off is
    --  Probe for e1000e nic's and add em.
    function Init return Boolean;
+
+   procedure Read
+      (Key         : System.Address;
+       Offset      : Unsigned_64;
+       Data        : out Operation_Data;
+       Ret_Count   : out Natural;
+       Success     : out Boolean;
+       Is_Blocking : Boolean);
+
+   procedure Write
+      (Key         : System.Address;
+       Offset      : Unsigned_64;
+       Data        : Operation_Data;
+       Ret_Count   : out Natural;
+       Success     : out Boolean;
+       Is_Blocking : Boolean);
+
+
+   procedure IO_Control
+      (Key       : System.Address;
+       Request   : Unsigned_64;
+       Argument  : System.Address;
+       Has_Extra : out Boolean;
+       Extra     : out Unsigned_64;
+       Success   : out Boolean);
 end Devices.e1000e;
