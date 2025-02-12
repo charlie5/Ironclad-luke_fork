@@ -29,6 +29,11 @@ package body Devices.e1000e with SPARK_Mode => Off is
       PCI_BAR1      : Arch.PCI.Base_Address_Register;
       PCI_BAR2      : Arch.PCI.Base_Address_Register;
       PCI_BAR3      : Arch.PCI.Base_Address_Register;
+      PCI_BAR4      : Arch.PCI.Base_Address_Register;
+      PCI_BAR5      : Arch.PCI.Base_Address_Register;
+      PCI_BAR6      : Arch.PCI.Base_Address_Register;
+      Num_Str       : Lib.Messages.Translated_String;
+      Num_Len       : Natural;
    begin
       Lib.Messages.Put_Line ("Devices.e1000e.Init");
 
@@ -44,9 +49,64 @@ package body Devices.e1000e with SPARK_Mode => Off is
          Arch.PCI.Get_BAR (PCI_Dev, 0, PCI_BAR0, Success);
 
          if not Success then
-            PCI_BAR0.Base := 16#1F0#; -- TODO: Correct?
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
          else
-            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 0 found");
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR0.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 0 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 1, PCI_BAR1, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR1.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 1 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 2, PCI_BAR2, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR2.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 2 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 3, PCI_BAR3, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR3.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 3 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 4, PCI_BAR4, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR4.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 4 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 5, PCI_BAR5, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR5.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 5 found at: " & Num_Str);
+         end if;
+
+         Arch.PCI.Get_BAR (PCI_Dev, 6, PCI_BAR6, Success);
+
+         if not Success then
+            PCI_BAR0.Base := 16#1F0#; -- TODO: What to do?
+         else
+            Lib.Messages.Image (Unsigned_64 (PCI_BAR6.Base), Num_Str, Num_Len, Use_Hex => True);
+            Lib.Messages.Put_Line ("Devices.e1000e.Init: BAR 6 found at: " & Num_Str);
          end if;
       end loop;
 
